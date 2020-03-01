@@ -21,6 +21,22 @@
             <td>
               <%= @book_detail.body %>
             </td>
+            <td>
+              <% if @book_detail.favorited?(current_user) %>
+                <!-- link_toのデフォルトのhttpメソッド はgetになっているから、postの場合は明示してあげる必要がある -->
+                <%= link_to book_favorites_path(@book_detail),method: :delete do %>
+                  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                <% end %>            
+              <% else %>
+                <%= link_to book_favorites_path(@book_detail),method: :post do %>
+                  <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+                <% end %>
+              <% end %>
+            </td>
+
+            <td>
+              <%= @book_detail.favorites.count %>いいね
+            </td>
 
             <% if @user == current_user %>
               <td>
@@ -30,8 +46,52 @@
                 <%= link_to "Destroy", book_path(@book_detail),method: :delete,class: "btn btn-danger btn-sm" %>
               </td>
             <% end %>
+            <td>コメント数<%= @book_detail.book_comments.count%></td>
           </tr>
         </tbody>
     </table>
+
+    <!-- コメントの一覧 -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Comment</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @book_comments.each do |comment| %>
+          <tr>
+            <td>
+                <%= attachment_image_tag comment.user,:profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size: "60x60" %>
+            </td>
+            <td><%= comment.comment %></td>
+            <td><%= link_to "削除",book_book_comments_path(comment.id),method: :delete ,class:"btn btn-danger btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+    <!-- コメントを投稿 -->
+    <%= form_for([@book_detail,@book_comment]) do |f| %>
+      <% if @book_comment.errors.any? %>
+        <%= @book_comment.errors.count %> error prohibited this obj from being saved
+        <% @book_comment.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    <% end %>
+
+    <div class="form">
+      <%= f.label :comment %>
+      <%= f.text_area :comment,class:"form-control" %>      
+    </div>
+    <div class="form">
+      <%= f.submit "submit" %>      
+    </div>
+    <% end %>
   </div>
 </div>

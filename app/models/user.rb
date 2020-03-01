@@ -6,12 +6,18 @@ class User < ApplicationRecord
   # 自己紹介文が最大50文字
   validates :introduction, length: {maximum: 50}
 
-  #refileを使うときの設定。このモデルのattachmentがきたら、profile_image_id を見に行くってこと。多分
+  #refileを使うときの設定。このモデルのattachmentがきたら、profile_image_id を見に行くってこと。
   attachment :profile_image
 
   #bookモデルと1:多の関係を作る（has_manyが1のほうで、 belongs_toが多のほう）
   has_many :books, dependent: :destroy
 
+  # favoriteモデルと1:多の関係を作る
+  has_many :favorites, dependent: :destroy
+
+  # book_commentモデルと1:多の関係
+  has_many :book_comments, dependent: :destroy
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -1,31 +1,41 @@
-# README
-# やらないといけない
- 1.共通部分を完成 ok
- 2.bootstrap ok
- 3.メッセージ ok
- 4.レコードの並び順 ok
- 5.validation ok
- 6.テスト ok
- 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 課題3 要件
 
-Things you may want to cover:
+課題3の課題となります。
+課題3
+①Bookers2にいいね機能を追加しましょう
+実装する機能
 
-* Ruby version
+コントローラ
+favoritesコントローラを追加 ok
+createアクションを追加 ok
+用途：いいねを作成する ok
+destroyアクションを追加 ok
+用途：いいねを削除する ok
+いいねを作成, いいねを削除した後は、行う前にいた画面に遷移すること ok
+モデル
+favoriteモデルを追加 ok
+用途：ユーザーと投稿のセットでいいねをしている状態とする ok
+ユーザーは一つの投稿に一つしかいいねできないこと ok
+ビュー
+投稿一覧画面にいいね数, いいね(する, 外す)ボタンを追加 ok
+投稿詳細画面にいいね数, いいね(する, 外す)ボタンを追加 ok
+いいねされていない記事に対しては、いいね作成ボタンを表示させる ok
+いいねされている記事に対しては、いいね削除ボタンを表示させる ok
 
-* System dependencies
+②Bookers2にコメント機能を追加しましょう
+実装する機能
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+コントローラ
+book_commentsコントローラを追加 ok
+createアクションを追加 ok
+用途：コメントを作成する ok
+destroyアクションを追加 ok
+用途：コメントを削除する ok
+自分のコメントしか削除できないこと ok
+コメント, コメント削除後は行う前の画面に遷移すること ok
+モデル
+book_commentモデルを追加 空のコメントは保存できないこと ok
+ビュー
+投稿一覧画面にコメント数を追加 ok
+投稿詳細画面に、投稿に対するコメント一覧, コメント数を追加 ok
+ユーザー詳細画面に、コメント数を追加
