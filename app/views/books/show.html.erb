@@ -67,7 +67,10 @@
                 <%= attachment_image_tag comment.user,:profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size: "60x60" %>
             </td>
             <td><%= comment.comment %></td>
-            <td><%= link_to "削除",book_book_comments_path(comment.id),method: :delete ,class:"btn btn-danger btn-sm" %></td>
+            <td>
+              <% if current_user.id == comment.user.id %>
+               <%= link_to "削除",book_book_comments_path(comment.id),method: :delete ,class:"btn btn-danger btn-sm" %></td>
+              <% end %>
           </tr>
         <% end %>
       </tbody>
