@@ -1,0 +1,24 @@
+    <table class="table table-striped" >
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Comment</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% book_comments.each do |comment| %>
+          <tr>
+            <td>
+                <%= attachment_image_tag comment.user,:profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg",size: "60x60" %>
+            </td>
+            <td><%= comment.comment %></td>
+            <td id="comment-<%=comment.id%>">
+              <% if current_user.id == comment.user.id %>
+                <%= link_to "削除",book_book_comments_path(book,comment.id),method: :delete ,class:"btn btn-danger btn-sm",remote: true %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

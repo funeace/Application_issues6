@@ -1,0 +1,14 @@
+    <!-- コメントを投稿 -->
+    <%= form_with model:[@book_detail,@book_comment], id: "comment_new", remote: true do |f| %>
+      <% if @book_comment.errors.any? %>
+        <%= @book_comment.errors.count %> error prohibited this obj from being saved
+        <% @book_comment.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      <% end %>
+      <%= f.label :comment %>
+      <%= f.text_area :comment,class:"form-control" %>      
+      <%= f.submit "submit" %>      
+    <% end %>

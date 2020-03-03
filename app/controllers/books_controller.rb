@@ -4,7 +4,7 @@ class BooksController < ApplicationController
     @books = Book.all.order(id: "DESC")
 
     #投稿部分
-    @user = User.find(current_user.id)
+    @user = current_user
     @book = Book.new
   end
 
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
       flash[:notice] = "You have creatad book successfully."
     else
       @book = book
-      @user = User.find(current_user.id)
+      @user = current_user
       @books = Book.all.order(id: "DESC")
       render :index
     end
@@ -27,7 +27,6 @@ class BooksController < ApplicationController
     # 子から親を参照している
     @user = @book_detail.user
     @book = Book.new
-
     # コメント部分
     @book_comments = @book_detail.book_comments.all
     @book_comment = BookComment.new
